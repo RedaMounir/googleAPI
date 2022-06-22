@@ -19,34 +19,49 @@ function initMap() {
   if(document.getElementById("SearchAddress").value === ""){
     console.log("input empty")
   
+// Get user geoLocation
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else {
+      console.log("Geolocation is not supported by this browser.");
+  }
+}
+function showPosition(position) {
+  console.log("Latitude: " + position.coords.latitude +
+  "Longitude: " + position.coords.longitude);        
+  let map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 8,
+    center: {lat: position.coords.latitude, lng: position.coords.longitude}
+  });
+  console.log("map",map)
+}
+getLocation();
+
       
-    let map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 8,
-      center: {lat: -34.397, lng: 150.644}
-    });
 
-    geocoder = new google.maps.Geocoder();
-    codeAddress(geocoder, map);
+    // geocoder = new google.maps.Geocoder();
+    // codeAddress(geocoder, map);
 
-    console.log("Search button was click")
+    // console.log("Search button was click")
 
-    function codeAddress(geocoder, map,) {
-      geocoder.geocode({'address':DefaultAddress}, function(results, status) {
-        console.log("Here is the results", results)
+    // function codeAddress(geocoder, map,) {
+    //   geocoder.geocode({'address':DefaultAddress}, function(results, status) {
+    //     console.log("Here is the results", results)
 
-        if (status === 'OK') {
+    //     if (status === 'OK') {
 
-          map.setCenter(results[0].geometry.location);
-          console.log("results geometry",results[0].geometry)
-          let marker = new google.maps.Marker({
-            map: map,
-            position: results[0].geometry.location
-          });
-        } else {
-          alert('Geocode was not successful for the following reason: ' + status);
-        }
-      });
-    }  
+    //       map.setCenter(results[0].geometry.location);
+    //       console.log("results geometry",results[0].geometry)
+    //       let marker = new google.maps.Marker({
+    //         map: map,
+    //         position: results[0].geometry.location
+    //       });
+    //     } else {
+    //       alert('Geocode was not successful for the following reason: ' + status);
+    //     }
+    //   });
+    // }  
     return
   }
  
