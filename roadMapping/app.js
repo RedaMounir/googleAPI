@@ -154,7 +154,7 @@ function initialize() {
 
   var myOptions = {
     center: new google.maps.LatLng(36.04540532617211, -86.63816821722166),
-    zoom: 8,
+    zoom: 10,
     mapTypeId: google.maps.MapTypeId.ROADMAP
 
   };
@@ -171,20 +171,19 @@ function setMarkers(map,locations){
 
     var marker, i
 
-for (i = 0; i < locations.length; i++)
-{  
+for (i = 0; i < locations.length; i++){  
 
-var loan = locations[i][0]
-var lat = locations[i][1]
-var long = locations[i][2]
-var add =  locations[i][3]
+    var loan = locations[i][0]
+    var lat = locations[i][1]
+    var long = locations[i][2]
+    var add =  locations[i][3]
 
-latlngset = new google.maps.LatLng(lat, long);
+    latlngset = new google.maps.LatLng(lat, long);
 
-var marker = new google.maps.Marker({  
-        map: map, title: loan , position: latlngset  
-      });
-      map.setCenter(marker.getPosition())
+    var marker = new google.maps.Marker({  
+            map: map, title: loan , position: latlngset  
+          });
+          map.setCenter(marker.getPosition())
 
 
       var content = "Loan Number: " + loan +  '</h3>' + "Address: " + add     
@@ -212,19 +211,19 @@ const LoopData =()=>{
 LoopData(locations);
 
 
-function createMarker(place) {
-  var placeLoc = place.geometry.location;
-  var marker = new google.maps.Marker({
-    map: map,
-    position: place.geometry.location
-  });
-}
+// function createMarker(place) {
+//   var placeLoc = place.geometry.location;
+//   var marker = new google.maps.Marker({
+//     map: map,
+//     position: place.geometry.location
+//   });
+// }
 
 
-function drop() {
-  for (var i =0; i < markerArray.length; i++) {
-    setTimeout(function() {
-      addMarkerMethod();
-    }, i * 200);
-  }
-}
+// function drop() {
+//   for (var i =0; i < markerArray.length; i++) {
+//     setTimeout(function() {
+//       addMarkerMethod();
+//     }, i * 200);
+//   }
+// }
