@@ -7,52 +7,110 @@ let map;
 let DefaultAddress = "1101 Church St Nashville TN 37201";
 let ListOfAddress = {list:[{address:"1101 Church St Nashville TN 37201"}, {address: "2900 Baby Ruth Ln Tn 37013"}, {address: "3716 southwind dr eau claire wisconsin 54701"}]}
 
+console.log(ListOfAddress.list[0].address)
+
 
 console.log("outside function", AddressEntered)
 
 
 
+// Render map and default address
 function initMap() {
-
-  if(document.getElementById("SearchAddress").value === ""){s
+  if(document.getElementById("SearchAddress").value === ""){
     console.log("input empty")
+  
+// Get user geoLocation
+      function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            console.log("Geolocation is not supported by this browser.");
+        }
+      }
+
+      function showPosition(position) {
+        console.log("Latitude: " + position.coords.latitude,"Longitude: " + position.coords.longitude);   
+      let myLatLng = {lat: position.coords.latitude, lng: position.coords.longitude}
+
+        let map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 11,
+          center: myLatLng
+        });
+        console.log("map",map)
+
+        new google.maps.Marker({
+          position: myLatLng,
+          map,
+          title: "Hello World!",
+        });
+      }
+      getLocation();
+
+   
+
+    // geocoder = new google.maps.Geocoder();
+    // codeAddress(geocoder, map);
+
+    // console.log("Search button was click")
+
+    // function codeAddress(geocoder, map,) {
+    //   geocoder.geocode({'address':DefaultAddress}, function(results, status) {
+    //     console.log("Here is the results", results)
+
+    //     if (status === 'OK') {
+
+    //       map.setCenter(results[0].geometry.location);
+    //       console.log("results geometry",results[0].geometry)
+    //       let marker = new google.maps.Marker({
+    //         map: map,
+    //         position: results[0].geometry.location
+    //       });
+    //     } else {
+    //       alert('Geocode was not successful for the following reason: ' + status);
+    //     }
+    //   });
+    // }  
+    return
   }
  
 }
+
+// Search box results
 const SearchAddressHandler =(e)=>{
-  e.preventDefault();
+    e.preventDefault();
 
-AddressEntered = document.getElementById("SearchAddress").value;
-console.log("inside function",AddressEntered)
-  let map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 8,
-    center: {lat: -34.397, lng: 150.644}
-  });
+  AddressEntered = document.getElementById("SearchAddress").value;
+  console.log("inside function", AddressEntered)
 
-  geocoder = new google.maps.Geocoder();
-  codeAddress(geocoder, map);
+    let map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 8,
+      center: {lat: -34.397, lng: 150.644}
+    });
 
-console.log("Search button was click")
+    geocoder = new google.maps.Geocoder();
+    codeAddress(geocoder, map);
 
-function codeAddress(geocoder, map,) {
-  
-  geocoder.geocode({'address':AddressEntered }, function(results, status) {
-    console.log("Here is the results", results)
+  console.log("Search button was click")
 
-    if (status === 'OK') {
+  function codeAddress(geocoder, map,) {
+    
+    geocoder.geocode({'address':AddressEntered}, function(results, status) {
+      console.log("Here is the results", results)
 
-      map.setCenter(results[0].geometry.location);
-      console.log()
-      let marker = new google.maps.Marker({
-        map: map,
-        position: results[0].geometry.location
-      });
+      if (status === 'OK') {
 
-      
-    } else {
-      alert('Geocode was not successful for the following reason: ' + status);
-    }
-  });
+        map.setCenter(results[0].geometry.location);
+        console.log("results geometry",results[0].geometry)
+        let marker = new google.maps.Marker({
+          map: map,
+          position: results[0].geometry.location
+        });
+
+        
+      } else {
+        alert('Geocode was not successful for the following reason: ' + status);
+      }
+    });
 }
 
 
@@ -74,14 +132,23 @@ return AddressEntered;
 
 const LoopData =(ListOfAddress)=>{
 
-  for( i = 0; i < ListOfAddress.length; i++ ) {
-    console.log(ListOfAddress[i])
+  for( i = 0; i < ListOfAddress.list.length; i++ ) {
+    console.log(ListOfAddress.list[i].address)
+    createMarker(ListOfAddress.list[i].address)
 
-    codeAddress(ListOfAddress[i])
 
 }}
 
 LoopData(ListOfAddress);
+
+
+function createMarker(place) {
+  var placeLoc = place.geometry.location;
+  var marker = new google.maps.Marker({
+    map: map,
+    position: place.geometry.location
+  });
+}
 
 
 function drop() {
