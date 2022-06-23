@@ -20,25 +20,33 @@ function initMap() {
     console.log("input empty")
   
 // Get user geoLocation
-function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
-  } else {
-      console.log("Geolocation is not supported by this browser.");
-  }
-}
-function showPosition(position) {
-  console.log("Latitude: " + position.coords.latitude +
-  "Longitude: " + position.coords.longitude);        
-  let map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 8,
-    center: {lat: position.coords.latitude, lng: position.coords.longitude}
-  });
-  console.log("map",map)
-}
-getLocation();
+      function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            console.log("Geolocation is not supported by this browser.");
+        }
+      }
 
-      
+      function showPosition(position) {
+        console.log("Latitude: " + position.coords.latitude,"Longitude: " + position.coords.longitude);   
+      let myLatLng = {lat: position.coords.latitude, lng: position.coords.longitude}
+
+        let map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 11,
+          center: myLatLng
+        });
+        console.log("map",map)
+
+        new google.maps.Marker({
+          position: myLatLng,
+          map,
+          title: "Hello World!",
+        });
+      }
+      getLocation();
+
+   
 
     // geocoder = new google.maps.Geocoder();
     // codeAddress(geocoder, map);
