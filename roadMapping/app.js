@@ -11,7 +11,7 @@ let DefaultAddress = "1101 Church St Nashville TN 37201";
 console.log("outside function", AddressEntered)
 
 
-// Search box results
+// Search box results----------------------------------
 const SearchAddressHandler =(e)=>{
     e.preventDefault();
 
@@ -53,6 +53,9 @@ return AddressEntered;
 }
 
 
+
+
+// Multiple Markers----------------------
 let locations = [
   ['loan 1', 36.04540532617211, -86.63816821722166, 'address 1'],
   ['loan 2', 36.04550074904296, -86.64139759679912, 'address 2'],
@@ -66,8 +69,7 @@ let locations = [
   ['loan 10',35.94183322508424, -86.53492943475756, 'address 10'],
 ];
 
-locations.push(['loan 11',35.944669009068186, -86.53567209039194, 'address 11'])
-locations.push(['loan 12',35.920221185841505, -86.37874894444582, 'address 12'])
+
 
 
 console.log(locations)
@@ -82,10 +84,11 @@ console.log(locations)
 
       function showPosition(position) {
         console.log("Latitude: " + position.coords.latitude,"Longitude: " + position.coords.longitude);   
-      let myLatLng = {lat: position.coords.latitude, lng: position.coords.longitude}
+        locations.push(['Start',position.coords.latitude,position.coords.longitude, 'Starting Point'])
+        locations.push(['loan 11',35.944669009068186, -86.53567209039194, 'address 11'])
+        locations.push(['loan 12',35.920221185841505, -86.37874894444582, 'address 12'])
 
-      locations.push(['Start',position.coords.latitude,position.coords.longitude, 'Starting Point'])
-
+        // let myLatLng = {lat: position.coords.latitude, lng: position.coords.longitude}
         // let map = new google.maps.Map(document.getElementById('map'), {
         //   zoom: 11,
         //   center: myLatLng
@@ -98,11 +101,6 @@ console.log(locations)
         //   title: "Hello World!",
         // });
       }
-      getLocation();
-
-
-
-
 
 function initialize() {
 
@@ -116,16 +114,16 @@ function initialize() {
       myOptions);
 
   setMarkers(map,locations)
-
 }
 
+getLocation();  
 
 
 function setMarkers(map,locations){
 
     let marker, i
 
-    for (i = 0; i < locations.length; i++){  
+    for (let i = 0; i < locations.length; i++){  
 
         let loan = locations[i][0]
         let lat = locations[i][1]
@@ -156,7 +154,7 @@ function setMarkers(map,locations){
 
 
 
-// Render map and default address
+// Render map and Geolocation address----------------------------------------
 // function initMap() {
 //   if(document.getElementById("SearchAddress").value === ""){
 //     console.log("input empty")
