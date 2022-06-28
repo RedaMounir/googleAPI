@@ -6,12 +6,37 @@ let geocoder;
 let map;
 let DefaultAddress = "1101 Church St Nashville TN 37201";
 
+const AddressList = [
+  {address : "1101 Church St Nashville TN 37201"},
+  {address : "4881 Teakwood Dr Oakley Ca 94561"},
+  {address : "2900 Baby Ruth Ln TN 37013"}
+
+]
+
+console.log("AddressList", AddressList);
+
+const AddressLoop =(data)=>{
+
+    for (let index = 0; index < data.length; index++) {
+      const element = data[index].address;
+      console.log(element)
+      
+    }
+
+}
+
+
+AddressLoop(AddressList);
+
+
+
+
+
+
+
 
 
 console.log("outside function", AddressEntered)
-
-
-
 
 // Multiple Markers----------------------
 let locations = [
