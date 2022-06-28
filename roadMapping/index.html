@@ -13,11 +13,11 @@
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCD-rZ1A2sevTBTOiOZWuFAsod-Lmz9dn8&callback=initMap">
 </script>
 </head>
-<body>
+<body  onload="initialize()">
     <h1>Google Maps</h1>
     <form action="">
-    <input type="text" placeholder="address" name="" id="SearchAddress">
-    <button onclick="SearchAddressHandler(event)">Search</button>
+    <input type="text" placeholder="address" name="" id="SearchAddress" value="2900 Baby Ruth Ln Antioch TN 37013">
+    <button onclick="SearchAddressHandler(event)" >Search</button>
 </form>
     <a href="https://developers.google.com/maps/documentation/javascript/markers">documentation</a>
 
