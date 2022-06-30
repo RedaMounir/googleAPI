@@ -58,18 +58,23 @@ return AddressEntered;
 // Multiple Markers----------------------
 let locations = [
   ['loan 1', 36.04540532617211, -86.63816821722166, 'address 1'],
-  ['loan 2', 36.04550074904296, -86.64139759679912, 'address 2'],
-  ['loan 3', 36.04953442760505, -86.64693367621155, 'address 3'],
-  ['loan 4', 36.04704484825914, -86.64996993680953, 'address 4'],
-  ['loan 5',36.049152755040225, -86.65078532833031, 'address 5'],
-  ['loan 6',36.04681373070971, -86.66617715309008, 'address 6'],
-  ['loan 7',36.130801329219345, -86.67800154260262, 'address 7'],
-  ['loan 8',36.09168159453195, -86.69123188422468, 'address 8'],
-  ['loan 9',35.93333197406146, -86.53717939617611, 'address 9'],
-  ['loan 10',35.94183322508424, -86.53492943475756, 'address 10'],
+  // ['loan 2', 36.04550074904296, -86.64139759679912, 'address 2'],
+  // ['loan 3', 36.04953442760505, -86.64693367621155, 'address 3'],
+  // ['loan 4', 36.04704484825914, -86.64996993680953, 'address 4'],
+  // ['loan 5',36.049152755040225, -86.65078532833031, 'address 5'],
+  // ['loan 6',36.04681373070971, -86.66617715309008, 'address 6'],
+  // ['loan 7',36.130801329219345, -86.67800154260262, 'address 7'],
+  // ['loan 8',36.09168159453195, -86.69123188422468, 'address 8'],
+  // ['loan 9',35.93333197406146, -86.53717939617611, 'address 9'],
+  // ['loan 10',35.94183322508424, -86.53492943475756, 'address 10'],
+  // ['Manuel',36.6341975, -87.42778779999999, 'address confirmation'],
+
 ];
 
-
+const addressList = [
+  {address: "299 Conrad Dr Clarksville TN 37042"},
+  {address: "2900 Baby Ruth Ln Antioch TN 37013"},
+]
 
 
 console.log(locations)
@@ -102,11 +107,7 @@ console.log(locations)
         // });
       }
 
-      const addressList = [
-        {address: "299 Conrad Dr Clarksville TN 37042"},
-        {address: "2900 Baby Ruth Ln Antioch TN 37013"},
-      ]
-    
+  
    
 
 function initialize() {
@@ -135,16 +136,26 @@ function initialize() {
           geocoder.geocode({'address':element}, function(results, status) {
             console.log("Here is the results", results)
           
-      
             if (status === 'OK') {
-             map.setCenter(results[0].geometry.location);      
-              console.log("Long:",element, results[0].geometry.bounds.Ra.hi, "lat:", results[0].geometry.bounds.wb.hi)
+            //  map.setCenter(results[0].geometry.location);      
+              console.log(element,"|| Coordinates || ", "lat:", results[0].geometry.bounds.wb.hi, "Long:", results[0].geometry.bounds.Ra.hi,)
+              let latCoordinate =  results[0].geometry.bounds.wb.hi;
+              let longCoordinate =  results[0].geometry.bounds.wb.hi;
+              locations.push(['hope',latCoordinate, longCoordinate, 'hope address'])
+              
+
+
             } else {
               alert('Geocode was not successful for the following reason: ' + status);
             }
+
           });
+          return;
           
         }
+
+        console.log("New location list", locations)
+ 
       
       }
       
