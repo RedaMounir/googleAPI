@@ -102,6 +102,13 @@ console.log(locations)
         // });
       }
 
+      const addressList = [
+        {address: "299 Conrad Dr Clarksville TN 37042"},
+        {address: "2900 Baby Ruth Ln Antioch TN 37013"},
+      ]
+    
+   
+
 function initialize() {
 
   let myOptions = {
@@ -112,6 +119,21 @@ function initialize() {
   };
   let map = new google.maps.Map(document.getElementById("map"),
       myOptions);
+
+
+// code must be called with in the initialized function
+  const ConvertAddress = (data) =>{
+    
+        console.log("Convert Address data", data);
+        for (let index = 0; index < data.length; index++) {
+          const element = data[index].address;
+          console.log("address to convert:", element);
+          
+        }
+      
+      }
+      
+      ConvertAddress(addressList);
 
   setMarkers(map,locations)
 }
@@ -150,6 +172,12 @@ function setMarkers(map,locations){
       })(marker,content,infowindow)); 
 
     }}
+
+
+  // 
+
+
+
 
 
 
