@@ -129,50 +129,57 @@ function initialize() {
 // code must be called with in the initialized function
   const ConvertAddress = (data) =>{
     console.log("Convert Address data", data);
+    let count = 0;
+
     
         for (let index = 0; index < data.length; index++) {
           const element = data[index].address;
           // console.log("address to convert:", element);
+          console.log(count)
+
 
           geocoder = new google.maps.Geocoder();
           console.log("geocoder", geocoder);
 
           geocoder.geocode({'address':element}, function(results, status) {
             console.log("Here is the results", results)
-          
             if (status === 'OK') {
+             count++
             //  map.setCenter(results[0].geometry.location);      
               console.log(element,"|| Coordinates || ", "lat:", results[0].geometry.bounds.wb.hi, "Long:", results[0].geometry.bounds.Ra.hi,)
               let latCoordinate =  results[0].geometry.bounds.wb.hi;
-              let longCoordinate =  results[0].geometry.bounds.wb.hi;
-              locations.push(['loan 12',latCoordinate, longCoordinate, 'address 12'])
+              let longCoordinate = results[0].geometry.bounds.Ra.hi;
+              locations.push(['Hope' + count,latCoordinate, longCoordinate, 'address'+ count])
 
-              
-
+              // need to call in the loop
+              setMarkers(map,locations)
 
             } else {
               alert('Geocode was not successful for the following reason: ' + status);
             }
 
           });
-          // return;
+
           
         }
 
-        console.log("New location list", locations)
+        // console.log("New location list", locations)
  
       
       }
-      
-      ConvertAddress(addressList);
 
-  setMarkers(map,locations)
+      
+
+  ConvertAddress(addressList);
+
+
 }
 
-getLocation();  
 
 
 function setMarkers(map,locations){
+
+    console.log("Set Markers location", locations)
 
     let marker, i
 
@@ -206,6 +213,7 @@ function setMarkers(map,locations){
 
 
   // 
+  getLocation();  
 
 
 
