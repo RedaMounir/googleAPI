@@ -123,11 +123,26 @@ function initialize() {
 
 // code must be called with in the initialized function
   const ConvertAddress = (data) =>{
+    console.log("Convert Address data", data);
     
-        console.log("Convert Address data", data);
         for (let index = 0; index < data.length; index++) {
           const element = data[index].address;
-          console.log("address to convert:", element);
+          // console.log("address to convert:", element);
+
+          geocoder = new google.maps.Geocoder();
+          console.log("geocoder", geocoder);
+
+          geocoder.geocode({'address':element}, function(results, status) {
+            console.log("Here is the results", results)
+          
+      
+            if (status === 'OK') {
+             map.setCenter(results[0].geometry.location);      
+              console.log("Long:",element, results[0].geometry.bounds.Ra.hi, "lat:", results[0].geometry.bounds.wb.hi)
+            } else {
+              alert('Geocode was not successful for the following reason: ' + status);
+            }
+          });
           
         }
       
