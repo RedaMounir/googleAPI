@@ -164,14 +164,9 @@ function initialize() {
         }
 
         // console.log("New location list", locations)
- 
       
       }
-
-      
-
   ConvertAddress(addressList);
-
 
 }
 
