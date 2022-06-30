@@ -68,12 +68,16 @@ let locations = [
   // ['loan 9',35.93333197406146, -86.53717939617611, 'address 9'],
   // ['loan 10',35.94183322508424, -86.53492943475756, 'address 10'],
   // ['Manuel',36.6341975, -87.42778779999999, 'address confirmation'],
+  // ['WindGate',36.1065828, -86.7341546, 'address'],
+
 
 ];
 
 const addressList = [
   {address: "299 Conrad Dr Clarksville TN 37042"},
   {address: "2900 Baby Ruth Ln Antioch TN 37013"},
+  {address: "3002 windgate ave 37211"},
+
 ]
 
 
@@ -141,7 +145,8 @@ function initialize() {
               console.log(element,"|| Coordinates || ", "lat:", results[0].geometry.bounds.wb.hi, "Long:", results[0].geometry.bounds.Ra.hi,)
               let latCoordinate =  results[0].geometry.bounds.wb.hi;
               let longCoordinate =  results[0].geometry.bounds.wb.hi;
-              locations.push(['hope',latCoordinate, longCoordinate, 'hope address'])
+              locations.push(['loan 12',latCoordinate, longCoordinate, 'address 12'])
+
               
 
 
