@@ -36,8 +36,6 @@ let locations = [
 const addressList = [
   {address: "2900 Baby Ruth Ln Antioch TN 37013"},
   {address: "3002 windgate ave 37211"},
-  {address: "299 Conrad Dr TN 37042"},
-
 ]
 
 console.log(locations)
