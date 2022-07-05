@@ -6,54 +6,38 @@ let geocoder;
 let map;
 let DefaultAddress = "1101 Church St Nashville TN 37201";
 
+const AddressList = [
+  {address : "1101 Church St Nashville TN 37201"},
+  {address : "4881 Teakwood Dr Oakley Ca 94561"},
+  {address : "2900 Baby Ruth Ln TN 37013"}
+
+]
+
+console.log("AddressList", AddressList);
+
+const AddressLoop =(data)=>{
+
+    for (let index = 0; index < data.length; index++) {
+      const element = data[index].address;
+
+      
+      console.log(element)
+      
+    }
+
+}
+
+
+
+
+
+
+
+
+
 
 
 console.log("outside function", AddressEntered)
-
-
-// Search box results----------------------------------
-const SearchAddressHandler =(e)=>{
-    e.preventDefault();
-
-  AddressEntered = document.getElementById("SearchAddress").value;
-  console.log("inside function", AddressEntered)
-
-    let map = new google.maps.Map(document.getElementById('map'), {
-      zoom: 8,
-      center: {lat: -34.397, lng: 150.644}
-    });
-
-    geocoder = new google.maps.Geocoder();
-    codeAddress(geocoder, map);
-
-    console.log("Search button was click")
-
-    function codeAddress(geocoder, map,) {
-    
-    geocoder.geocode({'address':AddressEntered}, function(results, status) {
-      console.log("Here is the results", results)
-
-      if (status === 'OK') {
-
-        map.setCenter(results[0].geometry.location);
-        console.log("results geometry",results[0].geometry)
-        let marker = new google.maps.Marker({
-          map: map,
-          position: results[0].geometry.location
-        });
-
-        
-      } else {
-        alert('Geocode was not successful for the following reason: ' + status);
-      }
-    });
-}
-
-return AddressEntered;
-}
-
-
-
 
 // Multiple Markers----------------------
 let locations = [
@@ -168,6 +152,55 @@ function setMarkers(map,locations){
 
 
 
+
+
+
+    
+// Search box results----------------------------------
+const SearchAddressHandler =(e)=>{
+  e.preventDefault();
+
+AddressEntered = document.getElementById("SearchAddress").value;
+console.log("inside function", AddressEntered)
+
+  let map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 8,
+    center: {lat: -34.397, lng: 150.644}
+  });
+
+  geocoder = new google.maps.Geocoder();
+  codeAddress(geocoder, map);
+
+console.log("Search button was click")
+
+function codeAddress(geocoder, map,) {
+  
+  geocoder.geocode({'address':AddressEntered}, function(results, status) {
+    console.log("Here is the results", results)
+    console.log("Here is lat", results[0].geometry.bounds.ub.lo)
+    console.log("Here is long", results[0].geometry.bounds.Ra.lo)
+    console.log("lat: 36.04538027656666, log: -86.6387390442064");
+
+    locations.push(['Added address',results[0].geometry.bounds.ub.lo, results[0].geometry.bounds.Ra.lo, 'pushed'])
+
+    if (status === 'OK') {
+
+      map.setCenter(results[0].geometry.location);
+      console.log("results geometry",results[0].geometry)
+      let marker = new google.maps.Marker({
+        map: map,
+        position: results[0].geometry.location
+      });
+
+      
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
+  });
+}
+
+return AddressEntered;
+}
 
 
 
