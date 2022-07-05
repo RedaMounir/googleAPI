@@ -26,9 +26,9 @@ const SearchAddressHandler =(e)=>{
     geocoder = new google.maps.Geocoder();
     codeAddress(geocoder, map);
 
-  console.log("Search button was click")
+    console.log("Search button was click")
 
-  function codeAddress(geocoder, map,) {
+    function codeAddress(geocoder, map,) {
     
     geocoder.geocode({'address':AddressEntered}, function(results, status) {
       console.log("Here is the results", results)
@@ -61,7 +61,7 @@ let locations = [
 ];
 
 const addressList = [
-  {address: "299 Conrad Dr Clarksville TN 37042"},
+  {address: "2900 Baby Ruth Ln Antioch TN 37013"},
   {address: "3002 windgate ave 37211"},
   // {address: "2900 Baby Ruth Ln Antioch TN 37013"},
 
@@ -89,7 +89,6 @@ getLocation();
 
 // 
 function initialize() {
-
   let myOptions = {
     center: new google.maps.LatLng(36.04540532617211, -86.63816821722166),
     zoom: 10,
@@ -106,8 +105,8 @@ function initialize() {
       let count = 0;
 
       for (let index = 0; index < data.length; index++) {
-          const element = data[index].address;
-          // console.log("address to convert:", element);
+            const element = data[index].address;
+            // console.log("address to convert:", element);
             geocoder = new google.maps.Geocoder();
             // console.log("geocoder", geocoder);
 
@@ -130,17 +129,12 @@ function initialize() {
         };        
   };
   ConvertAddress(addressList);
-
 }
 
 
 
 function setMarkers(map,locations){
-
     console.log("Set Markers location", locations)
-
-    let marker, i
-
     for (let i = 0; i < locations.length; i++){  
 
         let loan = locations[i][0]
